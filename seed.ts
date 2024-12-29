@@ -1,20 +1,30 @@
 import mongoose from "mongoose";
 import Event from "./models/seatModel"; // Import the Event model
+import dotenv from "dotenv";
+
+dotenv.config();
 
 
 // Load environment variables
+const mongodbUrl = process.env.MONGODB_URL;
+
+if (!mongodbUrl) {
+  throw new Error("MONGODB_URL is not defined in the environment variables");
+}
 
 
 // MongoDB Connection
 
 mongoose
-  .connect("mongodb+srv://rugveddeshmukh00:4QgYklgqSjO5sKko@post.t239k.mongodb.net/purplejallosh")
-  .then(() => {
-    console.log("Connected to MongoDB for seeding.");
-  })
-  .catch((err) => {
-    console.error("Failed to connect to MongoDB:", err);
-  });
+    .connect(mongodbUrl, {  })
+    .then(() => {
+      console.log("Connected to MongoDB for seeding.");
+      
+    })
+    .catch((err) => {
+      console.error("Failed to connect to MongoDB:", err);
+      
+    });
 
 // Define the default events
 const events = [
